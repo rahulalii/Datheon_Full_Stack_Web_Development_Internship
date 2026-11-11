@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" fill="none">
+  <defs>
+    <linearGradient id="p6bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18020C"/>
+      <stop offset="100%" stop-color="#310D20"/>
+    </linearGradient>
+    <linearGradient id="p6accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E"/>
+      <stop offset="100%" stop-color="#FB7185"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="360" rx="12" fill="url(#p6bg)"/>
+
+  <!-- Chrome -->
+  <rect x="0" y="0" width="600" height="38" rx="12" fill="#2E0A1E"/>
+  <rect x="0" y="24" width="600" height="14" fill="#2E0A1E"/>
+  <circle cx="24" cy="19" r="6" fill="#EF4444"/>
+  <circle cx="44" cy="19" r="6" fill="#F59E0B"/>
+  <circle cx="64" cy="19" r="6" fill="#10B981"/>
+  <rect x="96" y="9" width="340" height="20" rx="6" fill="#18020C"/>
+  <text x="110" y="23" fill="#FDA4AF" font-family="system-ui" font-size="11">https://nexus-store.vercel.app/shop/checkout</text>
+
+  <!-- Store Header & Showcase -->
+  <g transform="translate(30, 52)">
+    <!-- Store brand bar -->
+    <text x="0" y="20" fill="#FFF1F2" font-family="system-ui" font-size="16" font-weight="bold">NEXUS COMMERCE</text>
+    <rect x="420" y="2" width="120" height="26" rx="6" fill="#F43F5E"/>
+    <text x="480" y="19" fill="#FFFFFF" font-family="system-ui" font-size="11" font-weight="bold" text-anchor="middle">🛒 Cart (3) • $289</text>
+
+    <!-- Product Grid Mockup -->
+    <g transform="translate(0, 36)">
+      <!-- Item 1 -->
+      <rect width="168" height="225" rx="8" fill="#240716" stroke="#4C1230" stroke-width="1"/>
+      <rect x="14" y="14" width="140" height="110" rx="6" fill="#3D0C25"/>
+      <circle cx="84" cy="69" r="32" fill="#F43F5E" fill-opacity="0.3"/>
+      <text x="84" y="74" fill="#FDA4AF" font-family="system-ui" font-size="24" text-anchor="middle">🎧</text>
+      
+      <text x="14" y="146" fill="#FFE4E6" font-family="system-ui" font-size="11" font-weight="bold">Pro Audio Studio X</text>
+      <text x="14" y="164" fill="#FDA4AF" font-family="system-ui" font-size="10">Spatial Audio • ANC</text>
+      <text x="14" y="195" fill="#FFFFFF" font-family="system-ui" font-weight="bold" font-size="14">$189.00</text>
+      <rect x="110" y="180" width="44" height="22" rx="4" fill="#F43F5E"/>
+      <text x="132" y="195" fill="#FFFFFF" font-family="system-ui" font-size="10" font-weight="bold" text-anchor="middle">Add</text>
+    </g>
+
+    <g transform="translate(186, 36)">
+      <!-- Item 2 -->
+      <rect width="168" height="225" rx="8" fill="#240716" stroke="#4C1230" stroke-width="1"/>
+      <rect x="14" y="14" width="140" height="110" rx="6" fill="#3D0C25"/>
+      <circle cx="84" cy="69" r="32" fill="#FB7185" fill-opacity="0.3"/>
+      <text x="84" y="74" fill="#FDA4AF" font-family="system-ui" font-size="24" text-anchor="middle">⚡</text>
+      
+      <text x="14" y="146" fill="#FFE4E6" font-family="system-ui" font-size="11" font-weight="bold">Titan Charge 140W</text>
+      <text x="14" y="164" fill="#FDA4AF" font-family="system-ui" font-size="10">GaN Fast Charging</text>
+      <text x="14" y="195" fill="#FFFFFF" font-family="system-ui" font-weight="bold" font-size="14">$65.00</text>
+      <rect x="110" y="180" width="44" height="22" rx="4" fill="#F43F5E"/>
+      <text x="132" y="195" fill="#FFFFFF" font-family="system-ui" font-size="10" font-weight="bold" text-anchor="middle">Add</text>
+    </g>
+
+    <!-- Item 3 / Checkout overlay sneak-peek -->
+    <g transform="translate(372, 36)">
+      <rect width="168" height="225" rx="8" fill="#240716" stroke="#4C1230" stroke-width="1"/>
+      <rect x="14" y="14" width="140" height="30" rx="6" fill="#3D0C25"/>
+      <text x="24" y="34" fill="#10B981" font-family="system-ui" font-size="10" font-weight="bold">✓ Stripe Verified</text>
+
+      <text x="14" y="68" fill="#FDA4AF" font-family="system-ui" font-size="10">Subtotal</text>
+      <text x="120" y="68" fill="#FFF1F2" font-family="system-ui" font-size="10">$254.00</text>
+      <text x="14" y="86" fill="#FDA4AF" font-family="system-ui" font-size="10">Express Delivery</text>
+      <text x="132" y="86" fill="#10B981" font-family="system-ui" font-size="10">FREE</text>
+      <line x1="14" y1="100" x2="154" y2="100" stroke="#4C1230"/>
+      <text x="14" y="120" fill="#FFFFFF" font-family="system-ui" font-size="12" font-weight="bold">Total: $254.00</text>
+
+      <!-- Pay button -->
+      <rect x="14" y="140" width="140" height="32" rx="6" fill="#6366F1"/>
+      <text x="84" y="161" fill="#FFFFFF" font-family="system-ui" font-size="11" font-weight="bold" text-anchor="middle">Apple Pay / GPay</text>
+
+      <rect x="14" y="180" width="140" height="32" rx="6" fill="#000000" stroke="#4C1230"/>
+      <text x="84" y="201" fill="#FFFFFF" font-family="system-ui" font-size="11" font-weight="bold" text-anchor="middle">Pay with Card</text>
+    </g>
+  </g>
+</svg>

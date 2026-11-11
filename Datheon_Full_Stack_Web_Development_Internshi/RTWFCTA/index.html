@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Live Weather Telemetry Application - Real-time atmospheric metrics, 5-day forecast, dynamic animations, and global city search.">
+  <meta name="theme-color" content="#0f172a" id="meta-theme-color">
+  <title>AeroMetrics | Live Weather Telemetry Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Utility for visually hidden but screen-reader accessible content */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body class="theme-sunny">
+  <!-- Accessibility Skip Navigation Link -->
+  <a href="#main-content" class="skip-link">Skip to main telemetry</a>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header" role="banner">
+      <div class="brand-section">
+        <h1 class="brand-title">
+          <span class="telemetry-tag">AeroMetrics</span> Telemetry
+        </h1>
+        <div class="telemetry-beacon" aria-label="System status: Live connection active">
+          <span class="beacon-dot" aria-hidden="true"></span>
+          <span>LIVE TELEMETRY STATION</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Temperature Unit Switcher -->
+        <div class="unit-toggle-group" role="group" aria-label="Temperature unit selection">
+          <button type="button" class="unit-btn active" id="btn-unit-c" data-unit="metric" aria-pressed="true">°C</button>
+          <button type="button" class="unit-btn" id="btn-unit-f" data-unit="imperial" aria-pressed="false">°F</button>
+        </div>
+
+        <!-- GPS Geolocation Button -->
+        <button type="button" class="glass-btn" id="btn-gps" title="Locate via device GPS" aria-label="Use current device location">
+          <span id="gps-icon-slot" aria-hidden="true"></span>
+          <span>GPS</span>
+        </button>
+
+        <!-- API Config Button -->
+        <button type="button" class="glass-btn" id="btn-api-config" title="Configure Weather API key" aria-label="API Settings">
+          <span id="settings-icon-slot" aria-hidden="true"></span>
+          <span>API Key</span>
+        </button>
+
+        <!-- Active Provider Pill -->
+        <span class="provider-badge" id="provider-badge" title="Active Telemetry Engine">
+          Engine: Open-Meteo
+        </span>
+      </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section" aria-label="City search section">
+      <search>
+        <form class="search-form" id="search-form" action="#" method="GET">
+          <div class="search-icon-decor" id="search-icon-slot" aria-hidden="true"></div>
+          <label for="city-input" class="visually-hidden">Global City Name</label>
+          <input 
+            type="search" 
+            id="city-input" 
+            name="q" 
+            class="search-input" 
+            placeholder="Search any global city (e.g., Tokyo, London, Paris, New York)..." 
+            autocomplete="off" 
+            autocorrect="off" 
+            autocapitalize="none" 
+            spellcheck="false" 
+            enterkeyhint="search" 
+            required 
+          />
+          <button type="submit" class="search-submit-btn" id="search-submit-btn">
+            <span>Query Telemetry</span>
+          </button>
+        </form>
+      </search>
+
+      <!-- Quick City Selectors -->
+      <nav class="quick-cities-bar" aria-label="Popular telemetry stations">
+        <span class="quick-label">Stations:</span>
+        <div id="quick-cities-container" style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+          <button type="button" class="city-pill" data-city="London">London</button>
+          <button type="button" class="city-pill" data-city="Tokyo">Tokyo</button>
+          <button type="button" class="city-pill" data-city="New York">New York</button>
+          <button type="button" class="city-pill" data-city="Paris">Paris</button>
+          <button type="button" class="city-pill" data-city="Sydney">Sydney</button>
+          <button type="button" class="city-pill" data-city="Mumbai">Mumbai</button>
+        </div>
+      </nav>
+    </section>
+
+    <!-- Error Banner (Graceful invalid city & network failure feedback) -->
+    <div class="error-banner hidden" id="error-banner" role="alert" aria-live="assertive">
+      <div class="error-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <div class="error-content">
+        <h3 class="error-title" id="error-title">Telemetry Signal Lost</h3>
+        <p class="error-msg" id="error-message">Unable to locate city. Please verify spelling and try again.</p>
+        <div class="error-actions">
+          <button type="button" class="error-btn" id="error-retry-btn">Retry Station</button>
+          <button type="button" class="error-btn" id="error-dismiss-btn">Dismiss</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Network Loading Spinner Overlay -->
+    <div class="loading-overlay hidden" id="loading-spinner" role="status" aria-live="polite" aria-busy="true">
+      <div class="spinner-orbit" aria-hidden="true">
+        <div class="spinner-circle"></div>
+        <div class="spinner-circle"></div>
+        <div class="spinner-circle"></div>
+      </div>
+      <p class="loading-text" id="loading-text">Interrogating atmospheric satellite feeds...</p>
+    </div>
+
+    <!-- Main Dashboard Container -->
+    <main id="main-content" class="weather-dashboard">
+      <!-- 1. Hero Telemetry Card (Current conditions & temperature) -->
+      <section class="hero-telemetry-card" aria-label="Current atmospheric conditions">
+        <div class="hero-main-info">
+          <div class="location-group">
+            <h2 class="location-name" id="city-name">London</h2>
+            <span class="location-country" id="country-code">GB</span>
+          </div>
+          
+          <div class="telemetry-timestamp">
+            <time id="local-time" datetime="2026-11-11">Local Time: 12:00 PM</time>
+            <span>•</span>
+            <span id="station-coords">51.51°N, 0.13°W</span>
+          </div>
+
+          <div class="temp-condition-row">
+            <div class="current-temp-display">
+              <span id="current-temp-value">18</span><span class="temp-unit-symbol" id="hero-unit-symbol">°C</span>
+            </div>
+            <div class="condition-summary-block">
+              <span class="condition-text" id="weather-condition-desc">Partly Cloudy</span>
+              <span class="feels-like-text">Feels like <strong id="feels-like-value">17°C</strong></span>
+              <div class="temp-extremes-row">
+                <span class="temp-hi">▲ <span id="temp-high-value">20°C</span></span>
+                <span class="temp-lo">▼ <span id="temp-low-value">12°C</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Animated Weather Icon -->
+        <div class="hero-visual-icon" id="hero-weather-icon" role="img" aria-label="Weather condition icon">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </section>
+
+      <!-- 2. Telemetry Metrics Matrix (Humidity, Wind, Pressure, etc.) -->
+      <section class="telemetry-grid" aria-label="Atmospheric telemetry metrics">
+        <!-- Metric 1: Humidity -->
+        <article class="metric-card" id="card-humidity">
+          <div class="metric-header">
+            <span class="metric-header-title">
+              <span class="metric-icon-wrap" id="humidity-icon-slot"></span>
+              Humidity
+            </span>
+            <span id="humidity-comfort">Comfortable</span>
+          </div>
+          <div class="metric-body">
+            <div>
+              <span class="metric-value" id="humidity-val">65</span>
+              <span class="metric-unit">%</span>
+            </div>
+            <span class="metric-subtext">Relative Saturation</span>
+          </div>
+          <div class="meter-bar-track">
+            <div class="meter-bar-fill" id="humidity-meter-bar" style="width: 65%;"></div>
+          </div>
+        </article>
+
+        <!-- Metric 2: Wind Speed & Direction -->
+        <article class="metric-card" id="card-wind">
+          <div class="metric-header">
+            <span class="metric-header-title">
+              <span class="metric-icon-wrap" id="wind-icon-slot"></span>
+              Wind Velocity
+            </span>
+            <div class="wind-compass-indicator">
+              <div class="compass-dial" aria-hidden="true">
+                <div class="compass-arrow" id="compass-arrow" style="transform: rotate(45deg);"></div>
+              </div>
+              <span id="wind-direction-text">NE (45°)</span>
+            </div>
+          </div>
+          <div class="metric-body">
+            <div>
+              <span class="metric-value" id="wind-val">14</span>
+              <span class="metric-unit" id="wind-unit-label">km/h</span>
+            </div>
+            <span class="metric-subtext" id="wind-gust-label">Gentle Breeze</span>
+          </div>
+        </article>
+
+        <!-- Metric 3: Atmospheric Pressure -->
+        <article class="metric-card" id="card-pressure">
+          <div class="metric-header">
+            <span class="metric-header-title">
+              <span class="metric-icon-wrap" id="pressure-icon-slot"></span>
+              Atmospheric Pressure
+            </span>
+            <span id="pressure-status">Standard Barometric</span>
+          </div>
+          <div class="metric-body">
+            <div>
+              <span class="metric-value" id="pressure-val">1013</span>
+              <span class="metric-unit">hPa</span>
+            </div>
+            <span class="metric-subtext">Sea-Level Calibrated</span>
+          </div>
+        </article>
+
+        <!-- Metric 4: Visibility & Optics -->
+        <article class="metric-card" id="card-visibility">
+          <div class="metric-header">
+            <span class="metric-header-title">
+              <span class="metric-icon-wrap" id="visibility-icon-slot"></span>
+              Visibility
+            </span>
+            <span id="visibility-rating">Clear Horizon</span>
+          </div>
+          <div class="metric-body">
+            <div>
+              <span class="metric-value" id="visibility-val">10.0</span>
+              <span class="metric-unit" id="visibility-unit-label">km</span>
+            </div>
+            <span class="metric-subtext" id="visibility-desc">Unobstructed visual range</span>
+          </div>
+        </article>
+      </section>
+
+      <!-- 3. 5-Day Temperature Forecast Section (Array.map() driven) -->
+      <section class="forecast-section" aria-label="Five day meteorological forecast">
+        <div class="section-header-title">
+          <h3>5-Day Meteorological Forecast Matrix</h3>
+          <span class="section-subtitle">Computed using high-resolution numerical models</span>
+        </div>
+
+        <!-- 5 Forecast Cards mapped via Array.map() -->
+        <div class="forecast-cards-container" id="forecast-cards-container" role="region" aria-live="polite">
+          <!-- Dynamic cards injected via app.js -->
+        </div>
+      </section>
+    </main>
+
+    <!-- API Key Configuration Modal -->
+    <div class="modal-backdrop hidden" id="api-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 class="modal-title" id="modal-title">Weather API Configuration</h2>
+          <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            You can query telemetry with either <strong>OpenWeatherMap API</strong> or the built-in <strong>Open-Meteo zero-configuration engine</strong>.
+          </p>
+          <div class="field-group">
+            <label for="input-owm-key" class="field-label">OpenWeatherMap API Key (Optional)</label>
+            <input 
+              type="text" 
+              id="input-owm-key" 
+              class="field-input" 
+              placeholder="Paste your 32-character hex key here..." 
+              autocomplete="off" 
+              spellcheck="false"
+            />
+            <small style="color: var(--text-dim); font-size: 0.78rem;">
+              Need a key? Register free at <a href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan);">openweathermap.org ↗</a>. Leave empty to use Open-Meteo.
+            </small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="modal-use-openmeteo-btn">Use Open-Meteo</button>
+          <button type="button" class="btn-primary" id="modal-save-key-btn">Save Key</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>AeroMetrics Live Weather Telemetry Dashboard • Built with Fetch API, CSS Flexbox & Dynamic SVG</p>
+      <p>Data provided by <a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer">OpenWeatherMap</a> & <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a></p>
+    </footer>
+  </div>
+
+  <!-- Application Scripts (Compatible with both local file:// and HTTP servers) -->
+  <script src="icons.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

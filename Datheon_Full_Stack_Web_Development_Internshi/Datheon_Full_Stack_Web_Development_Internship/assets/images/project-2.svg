@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" fill="none">
+  <defs>
+    <linearGradient id="p2bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B132B"/>
+      <stop offset="100%" stop-color="#1C2541"/>
+    </linearGradient>
+    <linearGradient id="p2accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="p2prog" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="360" rx="12" fill="url(#p2bg)"/>
+
+  <!-- Browser Chrome -->
+  <rect x="0" y="0" width="600" height="38" rx="12" fill="#151E3D"/>
+  <rect x="0" y="24" width="600" height="14" fill="#151E3D"/>
+  <circle cx="24" cy="19" r="6" fill="#EF4444"/>
+  <circle cx="44" cy="19" r="6" fill="#F59E0B"/>
+  <circle cx="64" cy="19" r="6" fill="#10B981"/>
+  <rect x="96" y="9" width="340" height="20" rx="6" fill="#0B132B"/>
+  <text x="110" y="23" fill="#64748B" font-family="system-ui" font-size="11">https://cloudnest.io/vault/encrypted-drive</text>
+
+  <!-- Left Sidebar -->
+  <rect x="0" y="38" width="130" height="322" fill="#0E1630" opacity="0.8"/>
+  <g transform="translate(18, 55)">
+    <circle cx="10" cy="10" r="10" fill="url(#p2accent)"/>
+    <text x="28" y="14" fill="#F8FAFC" font-family="system-ui" font-size="12" font-weight="bold">CloudNest</text>
+  </g>
+  <rect x="18" y="90" width="94" height="26" rx="6" fill="#1E293B"/>
+  <text x="32" y="107" fill="#38BDF8" font-family="system-ui" font-size="11" font-weight="bold">📁 All Files</text>
+  <text x="32" y="138" fill="#94A3B8" font-family="system-ui" font-size="11">⚡ Shared</text>
+  <text x="32" y="166" fill="#94A3B8" font-family="system-ui" font-size="11">🔒 Secure Vault</text>
+  <text x="32" y="194" fill="#94A3B8" font-family="system-ui" font-size="11">⚙️ Settings</text>
+
+  <!-- Storage Meter in Sidebar -->
+  <g transform="translate(14, 280)">
+    <rect width="102" height="60" rx="8" fill="#151E3D" stroke="#334155" stroke-width="1"/>
+    <text x="10" y="20" fill="#94A3B8" font-family="system-ui" font-size="10">Encrypted Storage</text>
+    <rect x="10" y="30" width="82" height="6" rx="3" fill="#334155"/>
+    <rect x="10" y="30" width="58" height="6" rx="3" fill="url(#p2prog)"/>
+    <text x="10" y="50" fill="#E2E8F0" font-family="system-ui" font-size="10" font-weight="bold">142.8 GB / 250 GB</text>
+  </g>
+
+  <!-- Main File Grid -->
+  <g transform="translate(150, 55)">
+    <text x="0" y="18" fill="#F8FAFC" font-family="system-ui" font-size="16" font-weight="bold">Recent Files</text>
+    <rect x="330" y="0" width="100" height="28" rx="6" fill="#0284C7"/>
+    <text x="380" y="18" fill="#FFFFFF" font-family="system-ui" font-size="11" font-weight="bold" text-anchor="middle">+ Upload File</text>
+
+    <!-- File Cards -->
+    <g transform="translate(0, 36)">
+      <!-- Card 1 -->
+      <rect width="132" height="110" rx="8" fill="#151E3D" stroke="#334155" stroke-width="1"/>
+      <rect x="16" y="16" width="36" height="36" rx="6" fill="#EF4444" fill-opacity="0.2"/>
+      <text x="34" y="38" fill="#F87171" font-family="system-ui" font-size="14" text-anchor="middle">PDF</text>
+      <text x="16" y="74" fill="#F1F5F9" font-family="system-ui" font-size="11" font-weight="bold">System-Arch.pdf</text>
+      <text x="16" y="92" fill="#64748B" font-family="system-ui" font-size="10">2.4 MB • 2h ago</text>
+    </g>
+
+    <g transform="translate(148, 36)">
+      <!-- Card 2 -->
+      <rect width="132" height="110" rx="8" fill="#151E3D" stroke="#334155" stroke-width="1"/>
+      <rect x="16" y="16" width="36" height="36" rx="6" fill="#3B82F6" fill-opacity="0.2"/>
+      <text x="34" y="38" fill="#60A5FA" font-family="system-ui" font-size="14" text-anchor="middle">TS</text>
+      <text x="16" y="74" fill="#F1F5F9" font-family="system-ui" font-size="11" font-weight="bold">AuthService.ts</text>
+      <text x="16" y="92" fill="#64748B" font-family="system-ui" font-size="10">48 KB • 5h ago</text>
+    </g>
+
+    <g transform="translate(296, 36)">
+      <!-- Card 3 -->
+      <rect width="132" height="110" rx="8" fill="#151E3D" stroke="#334155" stroke-width="1"/>
+      <rect x="16" y="16" width="36" height="36" rx="6" fill="#10B981" fill-opacity="0.2"/>
+      <text x="34" y="38" fill="#34D399" font-family="system-ui" font-size="14" text-anchor="middle">DB</text>
+      <text x="16" y="74" fill="#F1F5F9" font-family="system-ui" font-size="11" font-weight="bold">backup_shards.sql</text>
+      <text x="16" y="92" fill="#64748B" font-family="system-ui" font-size="10">14.1 MB • 1d ago</text>
+    </g>
+
+    <!-- Upload Progress Card / Transfer queue -->
+    <g transform="translate(0, 160)">
+      <rect width="428" height="115" rx="8" fill="#151E3D" stroke="#334155" stroke-width="1"/>
+      <text x="18" y="26" fill="#F1F5F9" font-family="system-ui" font-size="12" font-weight="bold">Multi-Part Resumable Upload Queue</text>
+      
+      <text x="18" y="54" fill="#CBD5E1" font-family="system-ui" font-size="11">Production_Model_Weights_v2.bin</text>
+      <text x="360" y="54" fill="#38BDF8" font-family="system-ui" font-size="11" font-weight="bold">78% • 18 MB/s</text>
+      <rect x="18" y="64" width="392" height="8" rx="4" fill="#0B132B"/>
+      <rect x="18" y="64" width="305" height="8" rx="4" fill="url(#p2prog)"/>
+      <text x="18" y="94" fill="#64748B" font-family="system-ui" font-size="10">End-to-End AES-GCM 256-bit encryption active</text>
+    </g>
+  </g>
+</svg>

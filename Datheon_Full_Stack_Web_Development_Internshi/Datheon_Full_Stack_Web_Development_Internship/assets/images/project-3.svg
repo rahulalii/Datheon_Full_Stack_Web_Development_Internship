@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" fill="none">
+  <defs>
+    <linearGradient id="p3bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#062016"/>
+      <stop offset="100%" stop-color="#0F2E22"/>
+    </linearGradient>
+    <linearGradient id="p3gauge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="360" rx="12" fill="url(#p3bg)"/>
+
+  <!-- Chrome -->
+  <rect x="0" y="0" width="600" height="38" rx="12" fill="#0D3829"/>
+  <rect x="0" y="24" width="600" height="14" fill="#0D3829"/>
+  <circle cx="24" cy="19" r="6" fill="#EF4444"/>
+  <circle cx="44" cy="19" r="6" fill="#F59E0B"/>
+  <circle cx="64" cy="19" r="6" fill="#10B981"/>
+  <rect x="96" y="9" width="340" height="20" rx="6" fill="#062016"/>
+  <text x="110" y="23" fill="#6EE7B7" font-family="system-ui" font-size="11">https://ecotrack.global/telemetry/iot-nodes</text>
+
+  <!-- Header Stat Bar -->
+  <g transform="translate(30, 56)">
+    <!-- Node 1 -->
+    <rect width="165" height="74" rx="8" fill="#0A2C20" stroke="#059669" stroke-width="1"/>
+    <text x="14" y="24" fill="#A7F3D0" font-family="system-ui" font-size="11">Active Sensor Nodes</text>
+    <text x="14" y="52" fill="#FFFFFF" font-family="system-ui" font-weight="bold" font-size="22">1,248</text>
+    <circle cx="140" cy="38" r="6" fill="#10B981"/>
+    <circle cx="140" cy="38" r="10" stroke="#10B981" stroke-width="1.5" stroke-opacity="0.5"/>
+  </g>
+
+  <g transform="translate(215, 56)">
+    <!-- Node 2 -->
+    <rect width="165" height="74" rx="8" fill="#0A2C20" stroke="#059669" stroke-width="1"/>
+    <text x="14" y="24" fill="#A7F3D0" font-family="system-ui" font-size="11">Carbon Saved (MT)</text>
+    <text x="14" y="52" fill="#34D399" font-family="system-ui" font-weight="bold" font-size="22">482.6</text>
+    <text x="116" y="52" fill="#6EE7B7" font-family="system-ui" font-size="11">▼ 18.4%</text>
+  </g>
+
+  <g transform="translate(400, 56)">
+    <!-- Node 3 -->
+    <rect width="170" height="74" rx="8" fill="#0A2C20" stroke="#059669" stroke-width="1"/>
+    <text x="14" y="24" fill="#A7F3D0" font-family="system-ui" font-size="11">Grid Efficiency Index</text>
+    <text x="14" y="52" fill="#FFFFFF" font-family="system-ui" font-weight="bold" font-size="22">99.1%</text>
+    <rect x="110" y="36" width="46" height="20" rx="4" fill="#047857"/>
+    <text x="133" y="50" fill="#ECFDF5" font-family="system-ui" font-size="10" font-weight="bold" text-anchor="middle">PEAK</text>
+  </g>
+
+  <!-- Interactive Map & Waveform Telemetry -->
+  <g transform="translate(30, 146)">
+    <!-- Sensor Grid Map Mockup -->
+    <rect width="320" height="190" rx="10" fill="#08261C" stroke="#047857" stroke-width="1"/>
+    <text x="16" y="26" fill="#ECFDF5" font-family="system-ui" font-size="12" font-weight="bold">Geospatial Telemetry Mesh</text>
+
+    <!-- Stylized Grid -->
+    <path d="M 30 70 Q 160 50 290 80 M 30 110 Q 160 90 290 120 M 30 150 Q 160 130 290 160" stroke="#047857" stroke-opacity="0.4" stroke-width="1.5" fill="none"/>
+    <path d="M 60 45 L 80 180 M 140 40 L 160 180 M 220 40 L 230 180" stroke="#047857" stroke-opacity="0.4" stroke-width="1.5"/>
+
+    <!-- Sensor Pulse Nodes -->
+    <circle cx="95" cy="85" r="7" fill="#10B981"/>
+    <circle cx="170" cy="115" r="8" fill="#34D399"/>
+    <circle cx="250" cy="90" r="6" fill="#10B981"/>
+    <circle cx="120" cy="145" r="6" fill="#34D399"/>
+    <circle cx="210" cy="155" r="5" fill="#10B981"/>
+    <!-- Connecting dashed mesh -->
+    <path d="M95 85 L170 115 L250 90 M170 115 L120 145 L210 155" stroke="#34D399" stroke-width="1.5" stroke-dasharray="3 3"/>
+  </g>
+
+  <!-- Live Emission Bar Chart -->
+  <g transform="translate(366, 146)">
+    <rect width="204" height="190" rx="10" fill="#08261C" stroke="#047857" stroke-width="1"/>
+    <text x="16" y="26" fill="#ECFDF5" font-family="system-ui" font-size="12" font-weight="bold">Hourly Emission Cycles</text>
+
+    <!-- Bars -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="80" width="16" height="45" rx="3" fill="#047857"/>
+      <rect x="24" y="60" width="16" height="65" rx="3" fill="#059669"/>
+      <rect x="48" y="35" width="16" height="90" rx="3" fill="#10B981"/>
+      <rect x="72" y="20" width="16" height="105" rx="3" fill="#34D399"/>
+      <rect x="96" y="45" width="16" height="80" rx="3" fill="#10B981"/>
+      <rect x="120" y="65" width="16" height="60" rx="3" fill="#059669"/>
+      <rect x="144" y="90" width="16" height="35" rx="3" fill="#047857"/>
+      <!-- Zero Line -->
+      <line x1="0" y1="126" x2="164" y2="126" stroke="#059669" stroke-width="2"/>
+    </g>
+    <text x="18" y="168" fill="#6EE7B7" font-family="system-ui" font-size="10">MQTT / InfluxDB Live Streaming</text>
+  </g>
+</svg>
